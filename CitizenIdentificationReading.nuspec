@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>CCCD Scanner Pro</title> <authors>Huy Nguyen</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <description>Phần mềm quét và nhận diện CCCD chuyên nghiệp</description>
+    <releaseNotes>Bản cập nhật đầu tiên.</releaseNotes>
+    <copyright>Copyright 2026</copyright>
+    <tags>CCCD Scanner OCR</tags>
+  </metadata>
+  
+  <files>
+    <file src="bin\Release\**" target="lib\net45\" />
+  </files>
+</package>

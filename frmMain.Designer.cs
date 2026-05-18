@@ -630,7 +630,7 @@ namespace CitizenIdentificationReading
             chkInputContactLandUseChange.AutoSize = true;
             chkInputContactLandUseChange.Location = new Point(470, 24);
             chkInputContactLandUseChange.Name = "chkInputContactLandUseChange";
-            chkInputContactLandUseChange.Size = new Size(160, 19);
+            chkInputContactLandUseChange.Size = new Size(145, 19);
             chkInputContactLandUseChange.TabIndex = 53;
             chkInputContactLandUseChange.Text = "Nhập thông tin liên hệ";
             chkInputContactLandUseChange.UseVisualStyleBackColor = true;
@@ -810,7 +810,7 @@ namespace CitizenIdentificationReading
             Controls.Add(chkInputPhoneEmailAttachedLand);
             Name = "frmMain";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "CCCD Scanner";
+            Text = "CCCD Scanner Pro";
             ResumeLayout(false);
             PerformLayout();
         }

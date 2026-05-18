@@ -1,13 +1,9 @@
 using System.Data;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 using Xceed.Words.NET;
 using CitizenIdentificationReading.Services;
-using CitizenIdentificationReading.Constants;
 using CitizenIdentificationReading.Forms;
-using System.Threading;
-using System.IO;
+using Squirrel;
 
 namespace CitizenIdentificationReading
 {
@@ -23,6 +19,41 @@ namespace CitizenIdentificationReading
 
             // Initialize ComboBox
             cboPaperType.SelectedIndex = 0; // Default to Option 1
+
+            // Register Load Event for Update Check
+            this.Load += frmMain_Load;
+        }
+
+        private async void frmMain_Load(object sender, EventArgs e)
+        {
+            await CheckForUpdates();
+        }
+
+        private async Task CheckForUpdates()
+        {
+            string updateUrl = "https://github.com/huyns1998/CitizenIdentificationReading";
+
+            try
+            {
+                using (var mgr = new UpdateManager(updateUrl))
+                {
+                    var updateInfo = await mgr.CheckForUpdate();
+
+                    if (updateInfo.ReleasesToApply.Count > 0)
+                    {
+                        await mgr.UpdateApp();
+
+                        MessageBox.Show("Ứng dụng đã được cập nhật lên phiên bản mới nhất. Hệ thống sẽ khởi động lại!", "Cập nhật thành công");
+
+                        UpdateManager.RestartApp();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Tránh làm sập app nếu server update bị mất mạng hoặc lỗi
+                Console.WriteLine("Không thể kiểm tra cập nhật: " + ex.Message);
+            }
         }
 
         private void SetProcessingState(bool isProcessing)
