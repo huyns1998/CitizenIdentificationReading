@@ -3,12 +3,23 @@ namespace CitizenIdentificationReading.Forms
     public partial class frmInputIssuePlace : Form
     {
         private List<string> _names;
+        private CheckBox _parentCheckBox;
         public Dictionary<int, string> IssuePlaces { get; private set; } = new Dictionary<int, string>();
 
-        public frmInputIssuePlace(List<string> names)
+        public frmInputIssuePlace(List<string> names, CheckBox parentCheckBox = null)
         {
             InitializeComponent();
             _names = names;
+            _parentCheckBox = parentCheckBox;
+
+            if (_parentCheckBox != null)
+            {
+                chkSyncIssuePlace.Checked = _parentCheckBox.Checked;
+                chkSyncIssuePlace.CheckedChanged += (s, e) => {
+                    _parentCheckBox.Checked = chkSyncIssuePlace.Checked;
+                };
+            }
+
             GenerateInputs();
         }
 

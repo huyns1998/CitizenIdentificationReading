@@ -1,6 +1,6 @@
 namespace CitizenIdentificationReading.Forms
 {
-    partial class frmInputIssuePlace
+    partial class frmInputPhoneNumberMailChangeInlandApplication
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@ namespace CitizenIdentificationReading.Forms
             pnlInputs = new FlowLayoutPanel();
             btnOK = new Button();
             btnClose = new Button();
-            chkSyncIssuePlace = new CheckBox();
+            chkSyncPhoneEmail = new CheckBox();
             SuspendLayout();
             // 
             // pnlInputs
@@ -64,31 +64,31 @@ namespace CitizenIdentificationReading.Forms
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
             // 
-            // chkSyncIssuePlace
+            // chkSyncPhoneEmail
             // 
-            chkSyncIssuePlace.AutoSize = true;
-            chkSyncIssuePlace.Location = new Point(12, 258);
-            chkSyncIssuePlace.Name = "chkSyncIssuePlace";
-            chkSyncIssuePlace.Size = new Size(225, 19);
-            chkSyncIssuePlace.TabIndex = 3;
-            chkSyncIssuePlace.Text = "Nhập thông tin nơi cấp CCCD";
-            chkSyncIssuePlace.UseVisualStyleBackColor = true;
+            chkSyncPhoneEmail.AutoSize = true;
+            chkSyncPhoneEmail.Location = new Point(12, 258);
+            chkSyncPhoneEmail.Name = "chkSyncPhoneEmail";
+            chkSyncPhoneEmail.Size = new Size(225, 19);
+            chkSyncPhoneEmail.TabIndex = 3;
+            chkSyncPhoneEmail.Text = "Nhập thông tin số điện thoại và email";
+            chkSyncPhoneEmail.UseVisualStyleBackColor = true;
             // 
-            // frmInputIssuePlace
+            // frmInputPhoneNumberMailChangeInlandApplication
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(484, 296);
-            Controls.Add(chkSyncIssuePlace);
+            Controls.Add(chkSyncPhoneEmail);
             Controls.Add(btnClose);
             Controls.Add(btnOK);
             Controls.Add(pnlInputs);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "frmInputIssuePlace";
+            Name = "frmInputPhoneNumberMailChangeInlandApplication";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Nhập thông tin nơi cấp CCCD";
+            Text = "Nhập thông tin số điện thoại và email";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -96,7 +96,7 @@ namespace CitizenIdentificationReading.Forms
         private System.Windows.Forms.FlowLayoutPanel pnlInputs;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.CheckBox chkSyncIssuePlace;
+        private System.Windows.Forms.CheckBox chkSyncPhoneEmail;
 
         #endregion
     }
