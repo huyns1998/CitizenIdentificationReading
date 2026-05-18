@@ -9,10 +9,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Templates\application_attached_land.docx" />
     <None Remove="Templates\delegation.docx" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Templates\application_attached_land.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Templates\application_change_in_land.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

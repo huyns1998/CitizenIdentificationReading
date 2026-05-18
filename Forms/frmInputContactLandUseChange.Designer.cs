@@ -42,13 +42,13 @@ namespace CitizenIdentificationReading.Forms
             pnlInputs.FlowDirection = FlowDirection.TopDown;
             pnlInputs.Location = new Point(12, 12);
             pnlInputs.Name = "pnlInputs";
-            pnlInputs.Size = new Size(460, 160);
+            pnlInputs.Size = new Size(460, 81);
             pnlInputs.TabIndex = 0;
             pnlInputs.WrapContents = false;
             // 
             // btnOK
             // 
-            btnOK.Location = new Point(397, 185);
+            btnOK.Location = new Point(394, 108);
             btnOK.Name = "btnOK";
             btnOK.Size = new Size(75, 30);
             btnOK.TabIndex = 1;
@@ -58,7 +58,7 @@ namespace CitizenIdentificationReading.Forms
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(316, 185);
+            btnClose.Location = new Point(313, 108);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(75, 30);
             btnClose.TabIndex = 2;
@@ -69,9 +69,9 @@ namespace CitizenIdentificationReading.Forms
             // chkSyncContact
             // 
             chkSyncContact.AutoSize = true;
-            chkSyncContact.Location = new Point(12, 191);
+            chkSyncContact.Location = new Point(9, 114);
             chkSyncContact.Name = "chkSyncContact";
-            chkSyncContact.Size = new Size(160, 19);
+            chkSyncContact.Size = new Size(145, 19);
             chkSyncContact.TabIndex = 3;
             chkSyncContact.Text = "Nhập thông tin liên hệ";
             chkSyncContact.UseVisualStyleBackColor = true;
@@ -80,7 +80,7 @@ namespace CitizenIdentificationReading.Forms
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(484, 227);
+            ClientSize = new Size(484, 147);
             Controls.Add(chkSyncContact);
             Controls.Add(btnClose);
             Controls.Add(btnOK);

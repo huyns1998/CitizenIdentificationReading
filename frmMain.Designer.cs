@@ -80,6 +80,16 @@ namespace CitizenIdentificationReading
             btnCancelLandUseChange = new Button();
             btnResetLandUseChange = new Button();
             chkInputContactLandUseChange = new CheckBox();
+            txtPathToCccdAttachedLand = new TextBox();
+            btnSelectCCCDFolderAttachedLand = new Button();
+            txtSaveFolderAttachedLand = new TextBox();
+            btnSaveFolderAttachedLand = new Button();
+            btnScanAttachedLand = new Button();
+            txtErrorCCCDAttachedLand = new RichTextBox();
+            label1AttachedLand = new Label();
+            btnCancelAttachedLand = new Button();
+            btnResetAttachedLand = new Button();
+            chkInputPhoneEmailAttachedLand = new CheckBox();
             SuspendLayout();
             // 
             // btnSelectCCCDFolder
@@ -187,7 +197,7 @@ namespace CitizenIdentificationReading
             // 
             cboPaperType.DropDownStyle = ComboBoxStyle.DropDownList;
             cboPaperType.FormattingEnabled = true;
-            cboPaperType.Items.AddRange(new object[] { "Giấy ủy quyền", "Hợp đồng chuyển nhượng quyền sử dụng đất", "Đơn đăng ký biến động đất đai", "Đơn đề nghị chuyển mục đích sử dụng đất", "Tự chọn mẫu giấy tờ" });
+            cboPaperType.Items.AddRange(new object[] { "Giấy ủy quyền", "Hợp đồng chuyển nhượng quyền sử dụng đất", "Đơn đăng ký biến động đất đai", "Đơn đề nghị chuyển mục đích sử dụng đất", "Đơn đăng ký đất đai, tài sản gắn liền với đất", "Tự chọn mẫu giấy tờ" });
             cboPaperType.Location = new Point(160, 22);
             cboPaperType.Name = "cboPaperType";
             cboPaperType.Size = new Size(300, 23);
@@ -626,6 +636,111 @@ namespace CitizenIdentificationReading
             chkInputContactLandUseChange.UseVisualStyleBackColor = true;
             chkInputContactLandUseChange.Visible = false;
             // 
+            // txtPathToCccdAttachedLand
+            // 
+            txtPathToCccdAttachedLand.Location = new Point(46, 70);
+            txtPathToCccdAttachedLand.Name = "txtPathToCccdAttachedLand";
+            txtPathToCccdAttachedLand.Size = new Size(370, 23);
+            txtPathToCccdAttachedLand.TabIndex = 54;
+            txtPathToCccdAttachedLand.Visible = false;
+            txtPathToCccdAttachedLand.TextChanged += txtPathsAttachedLand_TextChanged;
+            // 
+            // btnSelectCCCDFolderAttachedLand
+            // 
+            btnSelectCCCDFolderAttachedLand.Location = new Point(449, 70);
+            btnSelectCCCDFolderAttachedLand.Name = "btnSelectCCCDFolderAttachedLand";
+            btnSelectCCCDFolderAttachedLand.Size = new Size(111, 23);
+            btnSelectCCCDFolderAttachedLand.TabIndex = 55;
+            btnSelectCCCDFolderAttachedLand.Text = "Chọn folder cccd";
+            btnSelectCCCDFolderAttachedLand.UseVisualStyleBackColor = true;
+            btnSelectCCCDFolderAttachedLand.Visible = false;
+            btnSelectCCCDFolderAttachedLand.Click += btnSelectCCCDFolderAttachedLand_Click;
+            // 
+            // txtSaveFolderAttachedLand
+            // 
+            txtSaveFolderAttachedLand.Location = new Point(45, 111);
+            txtSaveFolderAttachedLand.Name = "txtSaveFolderAttachedLand";
+            txtSaveFolderAttachedLand.Size = new Size(371, 23);
+            txtSaveFolderAttachedLand.TabIndex = 56;
+            txtSaveFolderAttachedLand.Visible = false;
+            txtSaveFolderAttachedLand.TextChanged += txtPathsAttachedLand_TextChanged;
+            // 
+            // btnSaveFolderAttachedLand
+            // 
+            btnSaveFolderAttachedLand.Location = new Point(449, 111);
+            btnSaveFolderAttachedLand.Name = "btnSaveFolderAttachedLand";
+            btnSaveFolderAttachedLand.Size = new Size(149, 23);
+            btnSaveFolderAttachedLand.TabIndex = 57;
+            btnSaveFolderAttachedLand.Text = "Chọn folder lưu kết quả";
+            btnSaveFolderAttachedLand.UseVisualStyleBackColor = true;
+            btnSaveFolderAttachedLand.Visible = false;
+            btnSaveFolderAttachedLand.Click += btnSaveFolderAttachedLand_Click;
+            // 
+            // btnScanAttachedLand
+            // 
+            btnScanAttachedLand.Enabled = false;
+            btnScanAttachedLand.Location = new Point(178, 190);
+            btnScanAttachedLand.Name = "btnScanAttachedLand";
+            btnScanAttachedLand.Size = new Size(75, 23);
+            btnScanAttachedLand.TabIndex = 58;
+            btnScanAttachedLand.Text = "Quét cccd";
+            btnScanAttachedLand.UseVisualStyleBackColor = true;
+            btnScanAttachedLand.Visible = false;
+            btnScanAttachedLand.Click += btnScanAttachedLand_Click;
+            // 
+            // txtErrorCCCDAttachedLand
+            // 
+            txtErrorCCCDAttachedLand.Location = new Point(49, 251);
+            txtErrorCCCDAttachedLand.Name = "txtErrorCCCDAttachedLand";
+            txtErrorCCCDAttachedLand.ReadOnly = true;
+            txtErrorCCCDAttachedLand.Size = new Size(553, 212);
+            txtErrorCCCDAttachedLand.TabIndex = 59;
+            txtErrorCCCDAttachedLand.Text = "";
+            txtErrorCCCDAttachedLand.Visible = false;
+            // 
+            // label1AttachedLand
+            // 
+            label1AttachedLand.Location = new Point(49, 225);
+            label1AttachedLand.Name = "label1AttachedLand";
+            label1AttachedLand.Size = new Size(100, 23);
+            label1AttachedLand.TabIndex = 60;
+            label1AttachedLand.Text = "log:";
+            label1AttachedLand.Visible = false;
+            // 
+            // btnCancelAttachedLand
+            // 
+            btnCancelAttachedLand.Enabled = false;
+            btnCancelAttachedLand.Location = new Point(259, 190);
+            btnCancelAttachedLand.Name = "btnCancelAttachedLand";
+            btnCancelAttachedLand.Size = new Size(75, 23);
+            btnCancelAttachedLand.TabIndex = 61;
+            btnCancelAttachedLand.Text = "Hủy";
+            btnCancelAttachedLand.UseVisualStyleBackColor = true;
+            btnCancelAttachedLand.Visible = false;
+            btnCancelAttachedLand.Click += btnCancelAttachedLand_Click;
+            // 
+            // btnResetAttachedLand
+            // 
+            btnResetAttachedLand.Location = new Point(341, 190);
+            btnResetAttachedLand.Name = "btnResetAttachedLand";
+            btnResetAttachedLand.Size = new Size(75, 23);
+            btnResetAttachedLand.TabIndex = 62;
+            btnResetAttachedLand.Text = "Đặt lại";
+            btnResetAttachedLand.UseVisualStyleBackColor = true;
+            btnResetAttachedLand.Visible = false;
+            btnResetAttachedLand.Click += btnResetAttachedLand_Click;
+            // 
+            // chkInputPhoneEmailAttachedLand
+            // 
+            chkInputPhoneEmailAttachedLand.AutoSize = true;
+            chkInputPhoneEmailAttachedLand.Location = new Point(470, 24);
+            chkInputPhoneEmailAttachedLand.Name = "chkInputPhoneEmailAttachedLand";
+            chkInputPhoneEmailAttachedLand.Size = new Size(225, 19);
+            chkInputPhoneEmailAttachedLand.TabIndex = 63;
+            chkInputPhoneEmailAttachedLand.Text = "Nhập thông tin số điện thoại và email";
+            chkInputPhoneEmailAttachedLand.UseVisualStyleBackColor = true;
+            chkInputPhoneEmailAttachedLand.Visible = false;
+            // 
             // frmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -683,6 +798,16 @@ namespace CitizenIdentificationReading
             Controls.Add(btnCancelLandUseChange);
             Controls.Add(btnResetLandUseChange);
             Controls.Add(chkInputContactLandUseChange);
+            Controls.Add(txtPathToCccdAttachedLand);
+            Controls.Add(btnSelectCCCDFolderAttachedLand);
+            Controls.Add(txtSaveFolderAttachedLand);
+            Controls.Add(btnSaveFolderAttachedLand);
+            Controls.Add(btnScanAttachedLand);
+            Controls.Add(txtErrorCCCDAttachedLand);
+            Controls.Add(label1AttachedLand);
+            Controls.Add(btnCancelAttachedLand);
+            Controls.Add(btnResetAttachedLand);
+            Controls.Add(chkInputPhoneEmailAttachedLand);
             Name = "frmMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CCCD Scanner";
@@ -747,5 +872,15 @@ namespace CitizenIdentificationReading
         private Button btnCancelLandUseChange;
         private Button btnResetLandUseChange;
         private CheckBox chkInputContactLandUseChange;
+        private TextBox txtPathToCccdAttachedLand;
+        private Button btnSelectCCCDFolderAttachedLand;
+        private TextBox txtSaveFolderAttachedLand;
+        private Button btnSaveFolderAttachedLand;
+        private Button btnScanAttachedLand;
+        private RichTextBox txtErrorCCCDAttachedLand;
+        private Label label1AttachedLand;
+        private Button btnCancelAttachedLand;
+        private Button btnResetAttachedLand;
+        private CheckBox chkInputPhoneEmailAttachedLand;
     }
 }
