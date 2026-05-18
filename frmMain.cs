@@ -51,7 +51,7 @@ namespace CitizenIdentificationReading
             chkInputIssuePlaceLandTransfer.Enabled = !isProcessing;
             chkInputPhoneEmailLandChange.Enabled = !isProcessing;
 
-            if (selectedIndex == 2) // Option 2
+            if (selectedIndex == 4) // Option 2 (Tự chọn mẫu giấy tờ, now final in list)
             {
                 btnScan.Enabled = !isProcessing;
                 btnScan.Text = isProcessing ? "Đang quét ccccd..." : "Quét cccd";
@@ -67,7 +67,7 @@ namespace CitizenIdentificationReading
                 btnCancelDeligationPaper.Visible = true;
                 btnResetDeligationPaper.Enabled = !isProcessing;
             }
-            else if (selectedIndex == 1) // Option 3
+            else if (selectedIndex == 1) // Option 3 (Hợp đồng chuyển nhượng...)
             {
                 btnScanLandTransfer.Enabled = !isProcessing;
                 btnScanLandTransfer.Text = isProcessing ? "Đang quét ccccd..." : "Quét cccd";
@@ -75,7 +75,7 @@ namespace CitizenIdentificationReading
                 btnCancelLandTransfer.Visible = true;
                 btnResetLandTransfer.Enabled = !isProcessing;
             }
-            else if (selectedIndex == 3) // Option 4
+            else if (selectedIndex == 2) // Option 4 (Đơn đăng ký biến động..., was 3)
             {
                 btnScanLandChange.Enabled = !isProcessing;
                 btnScanLandChange.Text = isProcessing ? "Đang quét ccccd..." : "Quét cccd";
@@ -83,14 +83,23 @@ namespace CitizenIdentificationReading
                 btnCancelLandChange.Visible = true;
                 btnResetLandChange.Enabled = !isProcessing;
             }
+            else if (selectedIndex == 3) // Option 5 (Đơn đề nghị chuyển mục đích sử dụng đất)
+            {
+                btnScanLandUseChange.Enabled = !isProcessing;
+                btnScanLandUseChange.Text = isProcessing ? "Đang quét ccccd..." : "Quét cccd";
+                btnCancelLandUseChange.Enabled = isProcessing;
+                btnCancelLandUseChange.Visible = true;
+                btnResetLandUseChange.Enabled = !isProcessing;
+            }
 
             if (!isProcessing)
             {
                 // Re-evaluate scan button enabled state based on paths
-                if (selectedIndex == 2) UpdateScanButtonState();
+                if (selectedIndex == 4) UpdateScanButtonState();
                 else if (selectedIndex == 0) btnScanDeligationPaper.Enabled = !string.IsNullOrWhiteSpace(txtPathToCccdDeligationPaper.Text) && !string.IsNullOrWhiteSpace(txtSaveFolderDeligationPaper.Text);
                 else if (selectedIndex == 1) btnScanLandTransfer.Enabled = !string.IsNullOrWhiteSpace(txtPathToCccdLandTransfer.Text) && !string.IsNullOrWhiteSpace(txtSaveFolderLandTransfer.Text);
-                else if (selectedIndex == 3) btnScanLandChange.Enabled = !string.IsNullOrWhiteSpace(txtPathToCccdLandChange.Text) && !string.IsNullOrWhiteSpace(txtSaveFolderLandChange.Text);
+                else if (selectedIndex == 2) btnScanLandChange.Enabled = !string.IsNullOrWhiteSpace(txtPathToCccdLandChange.Text) && !string.IsNullOrWhiteSpace(txtSaveFolderLandChange.Text);
+                else if (selectedIndex == 3) btnScanLandUseChange.Enabled = !string.IsNullOrWhiteSpace(txtPathToCccdLandUseChange.Text) && !string.IsNullOrWhiteSpace(txtSaveFolderLandUseChange.Text);
             }
         }
 
@@ -295,8 +304,8 @@ namespace CitizenIdentificationReading
         {
             int selectedIndex = cboPaperType.SelectedIndex;
             
-            // Option 2: Tự chọn mẫu giấy tờ
-            bool showCustomTemplate = selectedIndex == 2;
+            // Option 2: Tự chọn mẫu giấy tờ (now final at index 4)
+            bool showCustomTemplate = selectedIndex == 4;
             txtPathToCccd.Visible = showCustomTemplate;
             btnSelectCCCDFolder.Visible = showCustomTemplate;
             txtSaveFolder.Visible = showCustomTemplate;
@@ -334,8 +343,8 @@ namespace CitizenIdentificationReading
             btnResetLandTransfer.Visible = showLandTransfer;
             chkInputIssuePlaceLandTransfer.Visible = showLandTransfer;
 
-            // Option 4: Đơn đăng ký biến động đất đai
-            bool showLandChange = selectedIndex == 3;
+            // Option 4: Đơn đăng ký biến động đất đai (now at index 2)
+            bool showLandChange = selectedIndex == 2;
             txtPathToCccdLandChange.Visible = showLandChange;
             btnSelectCCCDFolderLandChange.Visible = showLandChange;
             txtSaveFolderLandChange.Visible = showLandChange;
@@ -346,6 +355,19 @@ namespace CitizenIdentificationReading
             btnCancelLandChange.Visible = showLandChange;
             btnResetLandChange.Visible = showLandChange;
             chkInputPhoneEmailLandChange.Visible = showLandChange;
+
+            // Option 5: Đơn đề nghị chuyển mục đích sử dụng đất (now at index 3)
+            bool showLandUseChange = selectedIndex == 3;
+            txtPathToCccdLandUseChange.Visible = showLandUseChange;
+            btnSelectCCCDFolderLandUseChange.Visible = showLandUseChange;
+            txtSaveFolderLandUseChange.Visible = showLandUseChange;
+            btnSaveFolderLandUseChange.Visible = showLandUseChange;
+            btnScanLandUseChange.Visible = showLandUseChange;
+            label1LandUseChange.Visible = showLandUseChange;
+            txtErrorCCCDLandUseChange.Visible = showLandUseChange;
+            btnCancelLandUseChange.Visible = showLandUseChange;
+            btnResetLandUseChange.Visible = showLandUseChange;
+            chkInputContactLandUseChange.Visible = showLandUseChange;
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -1158,6 +1180,263 @@ namespace CitizenIdentificationReading
 
                 // Lưu thành file mới
                 document.SaveAs(outputPath);
+            }
+        }
+
+        private void txtPathsLandUseChange_TextChanged(object sender, EventArgs e)
+        {
+            btnScanLandUseChange.Enabled = !string.IsNullOrWhiteSpace(txtPathToCccdLandUseChange.Text) &&
+                                           !string.IsNullOrWhiteSpace(txtSaveFolderLandUseChange.Text);
+        }
+
+        private void btnSelectCCCDFolderLandUseChange_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+            {
+                if (fbd.ShowDialog() == DialogResult.OK)
+                {
+                    txtPathToCccdLandUseChange.Text = fbd.SelectedPath;
+                }
+            }
+        }
+
+        private void btnSaveFolderLandUseChange_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+            {
+                if (fbd.ShowDialog() == DialogResult.OK)
+                {
+                    txtSaveFolderLandUseChange.Text = fbd.SelectedPath;
+                }
+            }
+        }
+
+        private void btnResetLandUseChange_Click(object sender, EventArgs e)
+        {
+            txtPathToCccdLandUseChange.Clear();
+            txtSaveFolderLandUseChange.Clear();
+            txtErrorCCCDLandUseChange.Clear();
+            chkInputContactLandUseChange.Checked = false;
+        }
+
+        private void btnCancelLandUseChange_Click(object sender, EventArgs e)
+        {
+            _cts?.Cancel();
+            LogAndSaveResult("Đã gửi yêu cầu hủy quét...", "", txtErrorCCCDLandUseChange, true);
+            btnCancelLandUseChange.Enabled = false;
+        }
+
+        private void FillLandUseChangeTemplate(string templatePath, string outputPath, List<CitizenData> users, string contactInfo = "")
+        {
+            using (var document = DocX.Load(templatePath))
+            {
+                int count = users.Count;
+                
+                // Fill user fields for each person
+                for (int i = 0; i < count; i++)
+                {
+                    string suffix = (i + 1).ToString();
+                    FillUserFields(document, suffix, users[i], null, true);
+                }
+
+                // Clear unused user fields for up to 2 users
+                for (int i = count; i < 2; i++)
+                {
+                    string suffix = (i + 1).ToString();
+                    ClearUserFields(document, suffix);
+                }
+
+                // Populate Contact Placeholder
+                string dots = "..................................................";
+                string contact = (!string.IsNullOrWhiteSpace(contactInfo)) ? contactInfo : dots;
+                document.ReplaceText("{{Contact}}", contact);
+
+                document.SaveAs(outputPath);
+            }
+        }
+
+        private async void btnScanLandUseChange_Click(object sender, EventArgs e)
+        {
+            string cccdPath = txtPathToCccdLandUseChange.Text;
+            string savePath = txtSaveFolderLandUseChange.Text;
+
+            if (!Directory.Exists(cccdPath))
+            {
+                MessageBox.Show("Folder chứa cccd không tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!Directory.Exists(savePath))
+            {
+                MessageBox.Show("Folder lưu kết quả không tồn tại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!Directory.GetDirectories(cccdPath).Any())
+            {
+                MessageBox.Show("Thư mục chứa cccd phải chứa thư mục con", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.Equals(Path.GetFullPath(cccdPath).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+                              Path.GetFullPath(savePath).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+                              StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Folder lưu kết quả không được trùng với folder chứa cccd", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            _cts = new CancellationTokenSource();
+            string logFilePath = Path.Combine(savePath, $"log_{DateTime.Now:ddMMyyyyHHmmss}.txt");
+            SetProcessingState(true);
+            txtErrorCCCDLandUseChange.Clear();
+
+            try
+            {
+                var subDirs = Directory.GetDirectories(cccdPath);
+                foreach (var dir in subDirs)
+                {
+                    if (_cts.Token.IsCancellationRequested) break;
+
+                    string folderName = Path.GetFileName(dir);
+                    var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+                    var images = Directory.GetFiles(dir)
+                        .Where(f => allowedExtensions.Contains(Path.GetExtension(f).ToLower()))
+                        .ToList();
+
+                    if (images.Count == 0)
+                    {
+                        LogAndSaveResult($"📁 {folderName} : Không tìm thấy file ảnh", logFilePath, txtErrorCCCDLandUseChange, true);
+                        continue;
+                    }
+
+                    if (images.Count > 2)
+                    {
+                        LogAndSaveResult($"📁 {folderName} : Vượt quá số lượng ảnh tối đa (tối đa 2 ảnh)", logFilePath, txtErrorCCCDLandUseChange, true);
+                        continue;
+                    }
+
+                    var sortedImages = images
+                        .Select(f => {
+                            string name = Path.GetFileNameWithoutExtension(f);
+                            int underscoreIndex = name.IndexOf('_');
+                            if (underscoreIndex > 0 && int.TryParse(name.Substring(0, underscoreIndex), out int idx))
+                            {
+                                return new { File = f, Index = idx };
+                            }
+                            return new { File = f, Index = -1 };
+                        })
+                        .OrderBy(x => x.Index)
+                        .ToList();
+
+                    if (sortedImages.Any(x => x.Index == -1))
+                    {
+                        string formatMsg = "1_{fileName} hoặc 1_{fileName}, 2_{fileName}";
+                        LogAndSaveResult($"📁 {folderName} : Không thể đọc vì tên không đúng format. Bạn cần sửa lại {formatMsg}", logFilePath, txtErrorCCCDLandUseChange, true);
+                        continue;
+                    }
+
+                    // Sequential check
+                    bool validOrder = true;
+                    for (int i = 0; i < sortedImages.Count; i++)
+                    {
+                        if (sortedImages[i].Index != i + 1)
+                        {
+                            validOrder = false;
+                            break;
+                        }
+                    }
+
+                    if (!validOrder)
+                    {
+                        string formatMsg = "1_{fileName} hoặc 1_{fileName}, 2_{fileName}";
+                        LogAndSaveResult($"📁 {folderName} : Sai thứ tự index. Bạn cần sửa lại {formatMsg}", logFilePath, txtErrorCCCDLandUseChange, true);
+                        continue;
+                    }
+
+                    List<CitizenData> results = new List<CitizenData>();
+                    bool folderSuccess = true;
+
+                    foreach (var imgItem in sortedImages)
+                    {
+                        if (_cts.Token.IsCancellationRequested) break;
+                        try
+                        {
+                            var scanResult = await _cccdReaderService.ScanCccdAsync(imgItem.File);
+                            if (scanResult != null && scanResult.Success && scanResult.Data != null)
+                            {
+                                results.Add(scanResult.Data);
+                            }
+                            else
+                            {
+                                LogAndSaveResult($"📁 {folderName} : Không thể đọc ảnh {Path.GetFileName(imgItem.File)}", logFilePath, txtErrorCCCDLandUseChange, true);
+                                folderSuccess = false;
+                                break;
+                            }
+                        }
+                        catch
+                        {
+                            LogAndSaveResult($"📁 {folderName} : Lỗi khi đọc ảnh {Path.GetFileName(imgItem.File)}", logFilePath, txtErrorCCCDLandUseChange, true);
+                            folderSuccess = false;
+                            break;
+                        }
+                    }
+
+                    if (!_cts.Token.IsCancellationRequested && folderSuccess && results.Count == images.Count)
+                    {
+                        string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Templates", "application_land_use_change.docx");
+                        if (!File.Exists(templatePath))
+                        {
+                            templatePath = @"d:\Project\CitizenIdentificationReading\Templates\application_land_use_change.docx";
+                        }
+
+                        if (!File.Exists(templatePath))
+                        {
+                            LogAndSaveResult($"📁 {folderName} : Không tìm thấy file template application_land_use_change.docx", logFilePath, txtErrorCCCDLandUseChange, true);
+                            continue;
+                        }
+
+                        string outputFileName = $"{folderName}_{DateTime.Now:HHmmss}.docx";
+                        string outputPath = Path.Combine(savePath, outputFileName);
+
+                        string contactVal = "";
+
+                        if (chkInputContactLandUseChange.Checked)
+                        {
+                            var names = results.Select(r => r.FullName ?? "Không rõ tên").ToList();
+                            using (var frm = new frmInputContactLandUseChange(names, chkInputContactLandUseChange))
+                            {
+                                if (frm.ShowDialog() == DialogResult.OK)
+                                {
+                                    contactVal = frm.ContactText;
+                                }
+                            }
+                        }
+
+                        FillLandUseChangeTemplate(templatePath, outputPath, results, contactVal);
+                        LogAndSaveResult($"📁 {folderName} : Quét thành công và xuất file {outputFileName}", "", txtErrorCCCDLandUseChange);
+                    }
+                }
+
+                if (_cts.Token.IsCancellationRequested)
+                {
+                    LogAndSaveResult("Quá trình quét đã bị hủy.", logFilePath, txtErrorCCCDLandUseChange, true);
+                }
+                else
+                {
+                    LogAndSaveResult("Hoàn tất quá trình quét.", "", txtErrorCCCDLandUseChange);
+                    MessageBox.Show("Hoàn tất quá trình quét!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogAndSaveResult($"Lỗi nghiêm trọng: {ex.Message}", logFilePath, txtErrorCCCDLandUseChange, true);
+            }
+            finally
+            {
+                SetProcessingState(false);
+                _cts?.Dispose();
+                _cts = null;
             }
         }
     }
